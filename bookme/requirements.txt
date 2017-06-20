@@ -1,0 +1,6 @@
+coverage==4.4.1
+Django==1.11.2
+django-filter==1.0.4
+djangorestframework==3.6.3
+Markdown==2.6.8
+pytz==2017.2
