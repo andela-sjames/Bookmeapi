@@ -17,12 +17,6 @@ class UserTestCase(APITestCase):
             last_name='Admin', password='random', 
             username='test.admin', is_staff=True)
 
-
-        # User.objects.create(
-        #     email='test.admin@test.com', first_name='Test', 
-        #     last_name='Admin', password='random', 
-        #     username='test.admin', is_staff=True)
-
         super(UserTestCase, self).setUp()
 
     
