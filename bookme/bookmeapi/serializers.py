@@ -13,9 +13,9 @@ class IssueSerializer(serializers.ModelSerializer):
         model = Issue
         fields = ('book', 'user', 'approved')
 
-class BookSerializer(serializers.HyperlinkedModelSerializer):
+class BookSerializer(serializers.ModelSerializer):
     
-    bookissue = IssueSerializer(many=True, read_only=True)
+    bookissue = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='book-detail')
 
     class Meta:
         model = Book
