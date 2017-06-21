@@ -14,6 +14,7 @@ from .models import Book, Issue
 from .serializers import IssueSerializer, BookSerializer, UserSerializer
 
 class BookListCreateView(ListCreateAPIView):
+    model = Book
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
@@ -38,7 +39,7 @@ class BookDetail(GenericAPIView):
 
 
 class UserDetail(GenericAPIView):
-    model = Issue
+    model = User
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
@@ -49,17 +50,20 @@ class UserDetail(GenericAPIView):
 
 
 class IssueListCreateView(ListCreateAPIView):
+    model = Issue
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
     permission_classes = (IsAuthenticated,)
 
 
 class IssueUpdateView(UpdateAPIView):
+    model = Issue
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
     permission_classes = (IsAdminUser,)
 
 
 class UserListCreateView(ListCreateAPIView):
+    model = User
     queryset = User.objects.all()
     serializer_class = UserSerializer

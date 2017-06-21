@@ -74,7 +74,7 @@ class BookTestCase(setUpModelInstanceTestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 
-    def test_book_can_be_retrieved(self):
+    def test_book_can_be_retrieved_by_auth_user(self):
 
         url = reverse('apibooks')
         self.client.force_authenticate(self.authUser)
@@ -82,8 +82,11 @@ class BookTestCase(setUpModelInstanceTestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+        data = response.data
+        self.assertIsInstance(data, list)
 
-    def test_book_detail_can_be_viewed(self):
+
+    def test_book_detail_can_be_viewed_by_auth_user(self):
          url = reverse('book-detail', kwargs={'pk': 2})
          self.client.force_authenticate(self.authUser)
          response = self.client.get(url)
@@ -92,5 +95,13 @@ class BookTestCase(setUpModelInstanceTestCase):
 
 
 class IssueTestCase(setUpModelInstanceTestCase):
-    pass
+    
+    def test_issues_can_retrieved_by_auth_user(self):
+        
+        url = reverse('api_issues')
+        self.client.force_authenticate(self.authUser)
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
 
