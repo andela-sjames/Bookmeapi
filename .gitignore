@@ -68,3 +68,4 @@ docs/_build/
 target/
 
 benv
+.vscode

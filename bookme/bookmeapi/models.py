@@ -7,6 +7,7 @@ from django.db import models
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class TimeStamp(models.Model):
     """Base class containing all models common information."""
 
@@ -17,12 +18,12 @@ class TimeStamp(models.Model):
         """Define Model as abstract."""
         abstract = True
 
+
 class Book(TimeStamp):
     """Book model defined here"""
     title = models.CharField(max_length=100)
     isbn = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
-
 
     def __unicode__(self):
         return "Book Title: {}" .format(self.title)
