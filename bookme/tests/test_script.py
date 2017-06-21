@@ -59,9 +59,38 @@ class setUpModelInstanceTestCase(APITestCase):
 
 
 class BookTestCase(setUpModelInstanceTestCase):
-        pass
+    def test_book_can_be_created(self):
+
+        data = {
+            'title':'Desert KINGS',
+            'isbn':'JKEXPRESS',
+            'category':'Action'
+            }
+        url = reverse('apibooks')
+        self.client.force_authenticate(self.admin)
+        response = self.client.post(url, data)
+
+        self.assertTrue(status.is_success(response.status_code))
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+
+    def test_book_can_be_retrieved(self):
+
+        url = reverse('apibooks')
+        self.client.force_authenticate(self.authUser)
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+    def test_book_detail_can_be_viewed(self):
+         url = reverse('book-detail', kwargs={'pk': 2})
+         self.client.force_authenticate(self.authUser)
+         response = self.client.get(url)
+
+         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class IssueTestCase(setUpModelInstanceTestCase):
-        pass
+    pass
 
