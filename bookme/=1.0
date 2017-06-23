@@ -1,0 +1,42 @@
+Collecting graphene-django
+  Downloading graphene-django-1.3.tar.gz
+Collecting six>=1.10.0 (from graphene-django)
+  Using cached six-1.10.0-py2.py3-none-any.whl
+Collecting graphene>=1.4 (from graphene-django)
+  Downloading graphene-1.4.tar.gz
+Requirement already satisfied: Django>=1.6.0 in ./benv/lib/python2.7/site-packages (from graphene-django)
+Collecting iso8601 (from graphene-django)
+  Using cached iso8601-0.1.11-py2.py3-none-any.whl
+Collecting singledispatch>=3.4.0.3 (from graphene-django)
+  Using cached singledispatch-3.4.0.3-py2.py3-none-any.whl
+Collecting graphql-core>=1.1 (from graphene>=1.4->graphene-django)
+  Downloading graphql-core-1.1.tar.gz (70kB)
+Collecting graphql-relay>=0.4.5 (from graphene>=1.4->graphene-django)
+  Downloading graphql-relay-0.4.5.tar.gz
+Collecting promise>=2.0 (from graphene>=1.4->graphene-django)
+  Downloading promise-2.0.2.tar.gz
+Requirement already satisfied: pytz in ./benv/lib/python2.7/site-packages (from Django>=1.6.0->graphene-django)
+Collecting typing (from promise>=2.0->graphene>=1.4->graphene-django)
+  Downloading typing-3.6.1.tar.gz (66kB)
+Building wheels for collected packages: graphene-django, graphene, graphql-core, graphql-relay, promise, typing
+  Running setup.py bdist_wheel for graphene-django: started
+  Running setup.py bdist_wheel for graphene-django: finished with status 'done'
+  Stored in directory: /Users/samueljames/Library/Caches/pip/wheels/9a/bd/bb/794fef5c55602fef55869081a88d2e003ad804f0fcbb6028cd
+  Running setup.py bdist_wheel for graphene: started
+  Running setup.py bdist_wheel for graphene: finished with status 'done'
+  Stored in directory: /Users/samueljames/Library/Caches/pip/wheels/1d/95/0f/bf688adacf2c55bb35ec9ef03250ad5e2f9920efcd8e06942b
+  Running setup.py bdist_wheel for graphql-core: started
+  Running setup.py bdist_wheel for graphql-core: finished with status 'done'
+  Stored in directory: /Users/samueljames/Library/Caches/pip/wheels/77/10/7a/8322f1e09072d8b064adc9bddfe1759c803725dd32f5c6c36b
+  Running setup.py bdist_wheel for graphql-relay: started
+  Running setup.py bdist_wheel for graphql-relay: finished with status 'done'
+  Stored in directory: /Users/samueljames/Library/Caches/pip/wheels/36/48/a7/94970107c36122aabf3112e850fb3aae0d2c0cc7882445e152
+  Running setup.py bdist_wheel for promise: started
+  Running setup.py bdist_wheel for promise: finished with status 'done'
+  Stored in directory: /Users/samueljames/Library/Caches/pip/wheels/91/fb/ac/5ec43e337133dcf63aa1d09c0e47adddf845049edaa94aa7f6
+  Running setup.py bdist_wheel for typing: started
+  Running setup.py bdist_wheel for typing: finished with status 'done'
+  Stored in directory: /Users/samueljames/Library/Caches/pip/wheels/b3/54/d1/d7ad0895b6f57c608afdf3ec5d2339c5d18ffcf2c2e0e0d9aa
+Successfully built graphene-django graphene graphql-core graphql-relay promise typing
+Installing collected packages: six, typing, promise, graphql-core, graphql-relay, graphene, iso8601, singledispatch, graphene-django
+Successfully installed graphene-1.4 graphene-django-1.3 graphql-core-1.1 graphql-relay-0.4.5 iso8601-0.1.11 promise-2.0.2 singledispatch-3.4.0.3 six-1.10.0 typing-3.6.1

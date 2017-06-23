@@ -39,7 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bookmeapi.apps.BookmeapiConfig',
     'rest_framework',
+    'graphene_django',
 ]
+
+GRAPHENE = {
+    'SCHEMA': 'bookmeapi.schema.schema', # Where your Graphene schema lives
+    'MIDDLEWARE': (
+        'graphene_django.debug.DjangoDebugMiddleware',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
