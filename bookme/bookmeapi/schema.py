@@ -14,7 +14,7 @@ class UserCreateInput(InputObjectType):
     username = graphene.String(required=True)
     first_name = graphene.String(required=False)
     last_name = graphene.String(required=False)
-    email = graphene.String(required=False)
+    email = graphene.String(required=True)
     is_staff = graphene.Boolean(required=False)
     is_active = graphene.Boolean(required=False)
     password = graphene.String(required=True)
@@ -41,14 +41,11 @@ class CreateUser(relay.ClientIDMutation):
 
     @classmethod
     def mutate_and_get_payload(cls, args, context, info):
-        
-        user_data = args.get('user')
-        user_name = user_data.get('username')
-        password = user_data.get('password')
-        email = user_data.get('email')
 
-        new_user = User.objects.create(username=user_name, email=email)
-        new_user.set_password(password)
+        user_data = args.get('user')
+        # unpack the dict item into the model instance 
+        new_user = User.objects.create(**user_data)
+        new_user.set_password(user_data.get('password'))
         new_user.save()
 
         return CreateUser(new_user=new_user)
