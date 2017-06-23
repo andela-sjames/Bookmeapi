@@ -1,15 +1,16 @@
 # source: https://github.com/graphql-python/graphene-django/
 # https://facebook.github.io/relay/graphql/mutations.htm
 # https://facebook.github.io/relay/graphql/mutations.htm
+# http://docs.graphene-python.org/projects/django/en/latest/tutorial-plain/
 
 import graphene
-from graphene import relay, ObjectType, AbstractType, InputObjectType
+from graphene import relay, ObjectType, InputObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
 from django.contrib.auth.models import User
 
-class UserCreateInput(graphene.InputObjectType):
+class UserCreateInput(InputObjectType):
     username = graphene.String(required=True)
     first_name = graphene.String(required=False)
     last_name = graphene.String(required=False)
@@ -17,7 +18,6 @@ class UserCreateInput(graphene.InputObjectType):
     is_staff = graphene.Boolean(required=False)
     is_active = graphene.Boolean(required=False)
     password = graphene.String(required=True)
-
 
 
 class UserNode(DjangoObjectType):
@@ -37,7 +37,6 @@ class CreateUser(relay.ClientIDMutation):
     class Input:
          user = graphene.Argument(UserCreateInput)
 
-
     new_user = graphene.Field(UserNode)
 
     @classmethod
@@ -47,13 +46,13 @@ class CreateUser(relay.ClientIDMutation):
         user_name = user_data.get('username')
         password = user_data.get('password')
         email = user_data.get('email')
-        new_user = UserNode(username=user_name, password=password, email=email)
+        new_user = User.objects.create(username=user_name, password=password, email=email)
         return CreateUser(new_user=new_user)
 
 
 class Query(ObjectType):
-    users = relay.Node.Field(UserNode)
-    all_users =  DjangoFilterConnectionField(UserNode)
+    users = relay.Node.Field(UserNode) # get user by id or by field name
+    all_users =  DjangoFilterConnectionField(UserNode) # get all users
 
     def resolve_users(self):
         return User.objects.all()
