@@ -46,7 +46,11 @@ class CreateUser(relay.ClientIDMutation):
         user_name = user_data.get('username')
         password = user_data.get('password')
         email = user_data.get('email')
-        new_user = User.objects.create(username=user_name, password=password, email=email)
+
+        new_user = User.objects.create(username=user_name, email=email)
+        new_user.set_password(password)
+        new_user.save()
+
         return CreateUser(new_user=new_user)
 
 
