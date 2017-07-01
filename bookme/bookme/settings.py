@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'bookmeapi.apps.BookmeapiConfig',
     'rest_framework',
     'graphene_django',
+    'django_elasticsearch_dsl',
 ]
 
 GRAPHENE = {
@@ -76,6 +77,12 @@ TEMPLATES = [
         },
     },
 ]
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
 
 LOGGING = {
   'version': 1,
