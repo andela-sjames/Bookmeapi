@@ -1,0 +1,20 @@
+
+if [[ $1 == "start" ]]
+then
+    # function to start or stop the elk servers
+    echo "arguement entered $1!"
+    exec elasticsearch -d
+    exec logstash -d
+    exec kibana -d
+    exit 0
+elif [[ $1 == "stop" ]]
+then
+    echo "arguement entered $1!"
+    exec elasticsearch stop
+    exec logstash stop
+    exec kibana stop
+    exit 0
+else
+    echo "Usage: $0 {stop|start}"
+            exit 1
+fi
