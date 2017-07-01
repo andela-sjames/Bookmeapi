@@ -6,9 +6,12 @@ graphene==1.4
 graphene-django==1.3
 graphql-core==1.1
 graphql-relay==0.4.5
+gunicorn==19.7.1
 iso8601==0.1.11
 Markdown==2.6.8
 promise==2.0.2
+python-json-logger==0.1.7
+python-logstash==0.4.6
 pytz==2017.2
 singledispatch==3.4.0.3
 six==1.10.0
