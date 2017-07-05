@@ -9,6 +9,8 @@ from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
 from django.contrib.auth.models import User
+from bookmeapi.models import Book, Issue
+
 
 class UserCreateInput(InputObjectType):
     username = graphene.String(required=True)
@@ -18,7 +20,6 @@ class UserCreateInput(InputObjectType):
     is_staff = graphene.Boolean(required=False)
     is_active = graphene.Boolean(required=False)
     password = graphene.String(required=True)
-
 
 class UserNode(DjangoObjectType):
     class Meta:
@@ -31,6 +32,22 @@ class UserNode(DjangoObjectType):
         }
         interfaces = (relay.Node, )
 
+class BookCreateInput(InputObjectType):
+    title = graphene.String(required=False)
+    isbn = graphene.String(required=False)
+    category = graphene.String(required=False)
+
+
+    
+class BookNode(DjangoObjectType):
+    class Meta:
+        model = Book
+        filter_fields = {
+            'title': ['exact','istartswith'],
+            'isbn':['exact'],
+            'category':['exact', 'icontains','istartswith'],
+        }
+        interfaces = (relay.Node, )
 
 class CreateUser(relay.ClientIDMutation):
 
@@ -51,19 +68,43 @@ class CreateUser(relay.ClientIDMutation):
         return CreateUser(new_user=new_user)
 
 
+class CreateBook(relay.ClientIDMutation):
+    
+    class Input:
+         book = graphene.Argument(BookCreateInput)
+
+    new_book = graphene.Field(BookNode)
+
+    @classmethod
+    def mutate_and_get_payload(cls, args, context, info):
+
+        book_data = args.get('book')
+        # unpack the dict item into the model instance 
+        new_book = Book.objects.create(**book_data)
+        new_book.save()
+
+        return CreateBook(new_book=new_book)
+
 class Query(ObjectType):
     users = relay.Node.Field(UserNode) # get user by id or by field name
     all_users =  DjangoFilterConnectionField(UserNode) # get all users
+    books = relay.Node.Field(BookNode)
+    all_books = DjangoFilterConnectionField(BookNode)
 
     def resolve_users(self):
         return User.objects.all()
+    
+    def resolve_books(self):
+        return Book.objects.all()    
 
 
 class Mutation(ObjectType):
      create_user = CreateUser.Field()
+     create_book = CreateBook.Field()
     
 
 schema = graphene.Schema(
     query=Query,
     mutation=Mutation,
 )
+
