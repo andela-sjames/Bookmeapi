@@ -1,5 +1,6 @@
 coverage==4.4.1
 Django==1.11.2
+django-elasticsearch-dsl==0.1.0
 django-filter==1.0.4
 djangorestframework==3.6.3
 elasticsearch==5.4.0
