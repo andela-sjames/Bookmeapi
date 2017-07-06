@@ -82,9 +82,8 @@ class CreateBook(relay.ClientIDMutation):
     def mutate_and_get_payload(cls, args, context, info):
 
         book_data = args.get('book')
-        # unpack the dict item into the model instance 
-        new_book = Book.objects.create(**book_data)
-        new_book.save()
+        book = Book()
+        new_book = update_create_instance(book, book_data)
 
         return cls(new_book=new_book)
 
