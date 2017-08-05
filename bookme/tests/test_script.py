@@ -11,6 +11,7 @@ from bookmeapi.models import Book, Issue
 
 
 class setUpModelInstanceTestCase(APITestCase):
+
     def setUp(self):
         self.admin = User.objects.create(
             email='admin_user@test.com', first_name='User',
@@ -48,8 +49,8 @@ class setUpModelInstanceTestCase(APITestCase):
 
         super(setUpModelInstanceTestCase, self).setUp()
 
-
     def test_user_can_be_retrieved(self):
+
         url = reverse('api_users')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -59,6 +60,7 @@ class setUpModelInstanceTestCase(APITestCase):
 
 
 class BookTestCase(setUpModelInstanceTestCase):
+
     def test_book_can_be_created(self):
 
         data = {
@@ -73,7 +75,6 @@ class BookTestCase(setUpModelInstanceTestCase):
         self.assertTrue(status.is_success(response.status_code))
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-
     def test_book_can_be_retrieved_by_auth_user(self):
 
         url = reverse('apibooks')
@@ -84,7 +85,6 @@ class BookTestCase(setUpModelInstanceTestCase):
 
         data = response.data
         self.assertIsInstance(data, list)
-
 
     def test_book_detail_can_be_viewed_by_auth_user(self):
          url = reverse('book-detail', kwargs={'pk': 2})

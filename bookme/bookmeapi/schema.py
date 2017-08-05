@@ -4,13 +4,14 @@
 # http://docs.graphene-python.org/projects/django/en/latest/tutorial-plain/
 
 import graphene
+
 from graphene import relay, ObjectType, InputObjectType
 from graphene_django import DjangoObjectType
 from graphene_django.filter import DjangoFilterConnectionField
 
-
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+
 from bookmeapi.models import Book, Issue
 from bookmeapi.helpers import get_object, get_errors, update_create_instance
 
