@@ -113,7 +113,7 @@ class UpdateBook(relay.ClientIDMutation):
                 # modify and update book model instance
                 book_data = args.get('book')
                 updated_book = update_create_instance(book_instance, book_data)
-            return cls(updated_book=updated_book)
+                return cls(updated_book=updated_book)
         except ValidationError as e:
             # return an error if something wrong happens
             return cls(updated_book=None, errors=get_errors(e))
