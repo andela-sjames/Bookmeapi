@@ -26,6 +26,11 @@ class UserCreateInput(InputObjectType):
     password = graphene.String(required=True)
 
 class BookCreateInput(InputObjectType):
+    """
+    Class created to accept input data 
+    from the interactive graphql console.
+    """
+
     title = graphene.String(required=False)
     isbn = graphene.String(required=False)
     category = graphene.String(required=False)
@@ -73,27 +78,28 @@ class CreateUser(relay.ClientIDMutation):
 
 
 class CreateBook(relay.ClientIDMutation):
-    
+  
     class Input:
-         book = graphene.Argument(BookCreateInput)
+        # BookCreateInput class used as argument here.
+        book = graphene.Argument(BookCreateInput)
 
     new_book = graphene.Field(BookNode)
 
     @classmethod
     def mutate_and_get_payload(cls, args, context, info):
 
-        book_data = args.get('book')
-        book = Book()
-        new_book = update_create_instance(book, book_data)
+        book_data = args.get('book') # get the book input from the args
+        book = Book() # get an instance of the book model here
+        new_book = update_create_instance(book, book_data) # use custom function to create book
 
-        return cls(new_book=new_book)
+        return cls(new_book=new_book) # newly created book instance returned.
 
 
 class UpdateBook(relay.ClientIDMutation):
 
     class Input:
-        book = graphene.Argument(BookCreateInput)
-        id = graphene.String(required=True)
+        book = graphene.Argument(BookCreateInput) # get the book input from the args
+        id = graphene.String(required=True) # get the book id
 
     errors = graphene.List(graphene.String)
     updated_book = graphene.Field(BookNode)
@@ -102,12 +108,14 @@ class UpdateBook(relay.ClientIDMutation):
     def mutate_and_get_payload(cls, args, context, info):
 
         try:
-            book_instance = get_object(Book, args['id'])
+            book_instance = get_object(Book, args['id']) # get book by id
             if book_instance:
+                # modify and update book model instance
                 book_data = args.get('book')
                 updated_book = update_create_instance(book_instance, book_data)
-            return cls(updated_book=updated_book)
+                return cls(updated_book=updated_book)
         except ValidationError as e:
+            # return an error if something wrong happens
             return cls(updated_book=None, errors=get_errors(e))
 
 
