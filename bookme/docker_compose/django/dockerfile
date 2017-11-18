@@ -1,0 +1,38 @@
+FROM python:3.6.2
+ENV PYTHONUNBUFFERED 1
+
+# update package lists, fix broken system packages
+RUN apt-get update
+RUN apt-get -f install
+
+# install and cache dependencies in /tmp directory.
+# doing it this way also installs any newly added dependencies.
+ADD ../../requirements.txt /tmp/requirements.txt
+RUN pip3 install -r /tmp/requirements.txt
+
+# load project files and set work directory
+ADD . /app/
+WORKDIR /app
+
+# create user and add to docker group
+RUN adduser --disabled-password --gecos '' djangoreactapp
+RUN groupadd docker
+RUN usermod -aG docker djangoreactapp
+
+# grant newly created user permissions on essential files
+RUN chown -R djangoreactapp:$(id -gn djangoreactapp) ~/
+RUN chown -R djangoreactapp:$(id -gn djangoreactapp) /app/
+
+# get the shell scripts into the container
+COPY ./docker_compose/django/start.sh /start.sh
+COPY ./docker_compose/django/entrypoint.sh /wait_for_postgres.sh
+
+RUN sed -i 's/\r//' /wait_for_postgres.sh \
+    && sed -i 's/\r//' /start.sh \
+    && chmod +x /wait_for_postgres.sh \
+    && chmod +x /start.sh
+
+# change user to newly created user
+USER djangoreactapp
+
+ENTRYPOINT ["/wait_for_postgres.sh.sh"]
