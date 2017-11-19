@@ -16,13 +16,13 @@ ADD . /app/
 WORKDIR /app
 
 # create user and add to docker group
-RUN adduser --disabled-password --gecos '' djangoreactapp
+RUN adduser --disabled-password --gecos '' djangobookme
 RUN groupadd docker
-RUN usermod -aG docker djangoreactapp
+RUN usermod -aG docker djangobookme
 
 # grant newly created user permissions on essential files
-RUN chown -R djangoreactapp:$(id -gn djangoreactapp) ~/
-RUN chown -R djangoreactapp:$(id -gn djangoreactapp) /app/
+RUN chown -R djangobookme:$(id -gn djangobookme) ~/
+RUN chown -R djangobookme:$(id -gn djangobookme) /app/
 
 # change user to newly created user
-USER djangoreactapp
+USER djangobookme
