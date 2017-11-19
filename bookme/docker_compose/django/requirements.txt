@@ -40,11 +40,10 @@ python-logstash==0.4.6
 pytz==2017.2
 PyYAML==3.12
 redis==2.10.5
-requests==2.18.4
+requests==2.11.1
 simplejson==3.11.1
 singledispatch==3.4.0.3
 six==1.10.0
-Tars==0.6.0
 typing==3.6.1
 uritemplate==3.0.0
 urllib3==1.21.1

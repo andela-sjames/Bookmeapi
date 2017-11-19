@@ -1,28 +1,29 @@
-version: '3'
+version: '3.2'
 
 services:
-  postgres:
+  db:
     restart: always
     image: postgres
     container_name: bookme_db
     volumes:
       - type: volume
         source: dbdata
-        target: /data
+        target: /pg_data
+    ports:
+      - "8001:5432"
   django_web:
     container_name: django_web
     labels:
       com.example.service: "web"
       com.example.description: "Use for the main web process"
-    network: host
     build:
-      context: ./docker_compose/django
-      dockefile: dockerfile
+      context: ./bookme/docker_compose/django/
+      dockerfile: Dockerfile
     image: bookme_django_web:1.0
     depends_on:
-      - postgres
-      command: ["./docker_compose/django/wait_for_postgres.sh"]
-    ports: 
+      - db
+    command: ["./docker_compose/django/wait_for_postgres.sh"]
+    ports:
       - "8000:8000"
     logging:
       driver: "json-file"
