@@ -10,7 +10,7 @@ def get_object(object_name, relayId, otherwise=None):
 
 def update_create_instance(instance, args, exception=['id']):
     if instance:
-        [setattr(instance, key, value) for key, value in args.items() if key not in exception]you
+        [setattr(instance, key, value) for key, value in args.items() if key not in exception]
 
     
     # caution if you literally cloned this project, then be sure to have
