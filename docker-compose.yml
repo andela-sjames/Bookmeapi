@@ -11,6 +11,30 @@ services:
         target: /pg_data
     ports:
       - "8001:5432"
+  es:
+    labels:
+      com.example.service: "es"
+      com.example.description: "Used for search and allows indexed data to be queried"
+    image: elasticsearch:5.4
+    container_name: bookme_es
+    volumes:
+      - type: volume
+        source: esdata
+        target: /usr/share/elasticsearch/data/
+    ports:
+      - "9200:9200"
+  kibana:
+    labels:
+      com.example.service: "kibana"
+      com.example.description: "Used for data visualisation of indexed data as well as for log aggregation"
+    image: kibana:5.4.3
+    container_name: bookme_kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://es:9200
+    depends_on:
+      - es
   django_web:
     container_name: django_web
     labels:
@@ -22,6 +46,8 @@ services:
     image: bookme_django_web:1.0
     depends_on:
       - db
+      - es
+      - kibana
     command: ["./docker_compose/django/wait_for_postgres.sh"]
     ports:
       - "8000:8000"
@@ -32,3 +58,4 @@ services:
 
 volumes:
   dbdata:
+  esdata:
