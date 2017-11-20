@@ -14,7 +14,7 @@ services:
   es:
     labels:
       com.example.service: "es"
-      com.example.description: "Used for search and allows indexed data to be queried"
+      com.example.description: "For searching and indexing data"
     image: elasticsearch:5.4
     container_name: bookme_es
     volumes:
@@ -26,7 +26,7 @@ services:
   kibana:
     labels:
       com.example.service: "kibana"
-      com.example.description: "Used for data visualisation of indexed data as well as for log aggregation"
+      com.example.description: "Data visualisation and for log aggregation"
     image: kibana:5.4.3
     container_name: bookme_kibana
     ports:
