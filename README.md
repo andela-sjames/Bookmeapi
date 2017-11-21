@@ -1,4 +1,4 @@
-####  Project built to demonstrate the power of Python/Django used with various technology.
+####  This project is built to demonstrate the power of Python/Django and how it can be combined/used with other technologies...
 
 Django was invented to meet fast-moving newsroom deadlines, while satisfying the tough requirements of experienced Web developers. [reference](https://www.djangoproject.com/start/overview/)
 
