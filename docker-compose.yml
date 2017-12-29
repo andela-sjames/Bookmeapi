@@ -11,6 +11,8 @@ services:
         target: /pg_data
     ports:
       - "8001:5432"
+  django_web:
+    container_name: django_web
   es:
     labels:
       com.example.service: "es"
@@ -45,26 +47,6 @@ services:
     command: logstash -f /logstash_dir/logstash.conf
     depends_on:
     - es
-  django_web:
-    container_name: django_web
-    labels:
-      com.example.service: "web"
-      com.example.description: "Use for the main web process"
-    build:
-      context: ./bookme/docker_compose/django/
-      dockerfile: Dockerfile
-    image: bookme_django_web:1.0
-    depends_on:
-      - db
-      - es
-      - kibana
-    command: ["./docker_compose/django/wait_for_postgres.sh"]
-    ports:
-      - "8000:8000"
-    logging:
-      driver: "json-file"
-    volumes:
-      - ./bookme:/app
 
 volumes:
   dbdata:
