@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from bookmeapi import views
+
 from graphene_django.views import GraphQLView
 
 
@@ -23,5 +25,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include('bookmeapi.urls')),
     url(r'^graphql', GraphQLView.as_view(graphiql=True)),
+    url(r'^$', views.HomeView.as_view(), name="homepage")
 
 ]

@@ -1,34 +1,35 @@
 version: '3.2'
 
 services:
-  nginx:
-      container_name: nginx_server
-      build:
-        context: ./bookme/docker_compose/django/
-        dockerfile: Dockerfile
-      depends_on:
-        - django_web
-      ports:
-        - "0.0.0.0:80:80"
-
-  # use gunicorn web server for django here... 
-  # work in progress...
   django_web:
-      labels:
-        com.example.service: "web"
-        com.example.description: "Use for the main web process"
-      build:
-        context: ./bookme/docker_compose/django/
-        dockerfile: Dockerfile
-      image: bookme_django_web:1.0
-      depends_on:
-        - db
-        - es
-        - kibana
-      command: ["./docker_compose/django/wait_for_postgres.sh"]
-      ports:
-        - "8000:8000"
-      logging:
-        driver: "json-file"
-      volumes:
-        - ./bookme:/app
+    labels:
+      com.example.service: "web"
+      com.example.description: "Use for the main web process"
+    build:
+      context: ./bookme/docker_compose/django/
+      dockerfile: Dockerfile
+    image: bookme_django_web:1.0
+    depends_on:
+      - db
+      - es
+      - kibana
+    command: ["./docker_compose/django/wait_for_postgres.sh"]
+    environment:
+      PRODUCTION: 'true'
+    logging:
+      driver: "json-file"
+    expose:
+      - "8000"
+    volumes:
+      - ./bookme:/app
+
+  nginx:
+    restart: always
+    container_name: nginx_server
+    build:
+      context: ./bookme/docker_compose/nginx/
+      dockerfile: Dockerfile
+    depends_on:
+      - django_web
+    ports:
+      - "0.0.0.0:80:80"

@@ -9,9 +9,13 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from django.shortcuts import render
 from django.contrib.auth.models import User
+from django.views.generic import TemplateView
 
 from .models import Book, Issue
 from .serializers import IssueSerializer, BookSerializer, UserSerializer
+
+class HomeView(TemplateView):
+    template_name = 'book.html'
 
 class BookListCreateView(ListCreateAPIView):
     model = Book
