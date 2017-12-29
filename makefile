@@ -9,3 +9,18 @@ stop-compose:
 
 ssh-nginx:
 	docker exec -it nginx_server bash
+
+ssh-django-web:
+	docker exec -it django_web bash
+
+ssh-db:
+	docker exec -it db bash
+
+ssh-es:
+	docker exec -it es bash
+
+ssh-kibana:
+	docker exec -it kibana bash
+
+check-network-config-details:
+	docker network inspect bookme_default
