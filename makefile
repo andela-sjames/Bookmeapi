@@ -5,6 +5,7 @@ start-prod:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 
 stop-compose:
+	@eval docker stop $$(docker ps -a -q)
 	docker-compose down
 
 ssh-nginx:
