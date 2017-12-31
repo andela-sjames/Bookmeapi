@@ -25,3 +25,9 @@ ssh-kibana:
 
 check-network-config-details:
 	docker network inspect bookme_default
+
+build-prod:
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
+
+build-dev:
+	docker-compose build
