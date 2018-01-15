@@ -15,5 +15,5 @@ This repository should be used as a reference/guide to understand the tutorials 
 
 - Using Docker with Elasticsearch, Logstash, and Kibana (ELK). - [Link to tutorial](https://www.codementor.io/samueljames/using-docker-with-elasticsearch-logstash-and-kibana-elk-dzucc3c94?published=1) (reference the setup-docker branch of the repository)
 
-Nginx: Setting Up a Simple Proxy Server Using Docker and Python/Django... - [Link to tutorial]()
+Nginx: Setting Up a Simple Proxy Server Using Docker and Python/Django... - [Link to tutorial](https://www.codementor.io/samueljames/nginx-setting-up-a-simple-proxy-server-using-docker-and-python-django-f7hy4e6jv?published=1)
 (reference the add-nginx branch of the repository)
