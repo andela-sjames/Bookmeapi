@@ -69,4 +69,3 @@ services:
 volumes:
   dbdata:
   esdata:
-  lgdata:
