@@ -35,6 +35,16 @@ services:
       - ELASTICSEARCH_URL=http://es:9200
     depends_on:
       - es
+  logstash:
+    labels:
+      com.example.service: "logstash"
+      com.example.description: "For logging data"
+    image: logstash:5.4.3
+    volumes:
+      - ./:/logstash_dir
+    command: logstash -f /logstash_dir/logstash.conf
+    depends_on:
+    - es
   django_web:
     container_name: django_web
     labels:
@@ -59,3 +69,4 @@ services:
 volumes:
   dbdata:
   esdata:
+  lgdata:
