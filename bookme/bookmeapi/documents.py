@@ -1,20 +1,15 @@
 # http://elasticsearch-dsl.readthedocs.io/en/stable/search_dsl.html
 # https://github.com/sabricot/django-elasticsearch-dsl
 # https://github.com/elastic/elasticsearch-dsl-py/blob/master/docs/search_dsl.rst
-
-from elasticsearch_dsl.connections import connections
 from django_elasticsearch_dsl import DocType, Index
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search
 
-client = Elasticsearch()
+client = Elasticsearch(['es:9200'])
 
 my_search = Search(using=client)
 
 from .models import Book
-
-# Create a connection to ElasticSearch
-connections.create_connection()
 
 book = Index('books')
 
