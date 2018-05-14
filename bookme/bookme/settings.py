@@ -99,7 +99,7 @@ LOGGING = {
             'formatter': 'simple'
         },
         'logstash': {
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'class': 'logstash.TCPLogstashHandler',
             'host': 'localhost',
             'port': 5959, # Default value: 5959
@@ -112,7 +112,7 @@ LOGGING = {
   'loggers': {
         'django.request': {
             'handlers': ['logstash'],
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'propagate': True,
         },
         'django': {
