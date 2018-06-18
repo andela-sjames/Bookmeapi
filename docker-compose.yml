@@ -46,7 +46,6 @@ services:
     depends_on:
     - es
     ports:
-      - "5044:5044"
       - "5959:5959"
   django_web:
     container_name: django_web
