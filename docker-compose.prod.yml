@@ -23,7 +23,6 @@ services:
       driver: "json-file"
     volumes:
       - ./bookme:/app
-
   nginx:
     restart: always
     container_name: nginx_server

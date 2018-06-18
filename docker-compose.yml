@@ -50,7 +50,6 @@ services:
       - ./:/logstash_dir
     command: logstash -f /logstash_dir/logstash.conf
     ports:
-      - "5044:5044"
       - "5959:5959"
     depends_on:
     - es
