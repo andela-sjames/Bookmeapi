@@ -45,6 +45,9 @@ services:
     command: logstash -f /logstash_dir/logstash.conf
     depends_on:
     - es
+    ports:
+      - "5044:5044"
+      - "5959:5959"
   django_web:
     container_name: django_web
     labels:
@@ -61,6 +64,10 @@ services:
     command: ["./docker_compose/django/wait_for_postgres.sh"]
     ports:
       - "8000:8000"
+    environment:
+      - LOGSTASH_HOST=logstash
+    expose:
+      - "5959"
     logging:
       driver: "json-file"
     volumes:
