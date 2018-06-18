@@ -16,6 +16,9 @@ services:
     command: ["./docker_compose/django/wait_for_postgres.sh"]
     environment:
       PRODUCTION: 'true'
+      LOGSTASH_HOST: logstash     
+    expose:
+      - "5959"
     logging:
       driver: "json-file"
     volumes:

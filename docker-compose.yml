@@ -13,6 +13,10 @@ services:
       - "8001:5432"
   django_web:
     container_name: django_web
+    environment:
+      - LOGSTASH_HOST=logstash     
+    expose:
+      - "5959"
   es:
     labels:
       com.example.service: "es"
@@ -45,6 +49,9 @@ services:
     volumes:
       - ./:/logstash_dir
     command: logstash -f /logstash_dir/logstash.conf
+    ports:
+      - "5044:5044"
+      - "5959:5959"
     depends_on:
     - es
 
