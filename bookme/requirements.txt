@@ -2,7 +2,7 @@ coverage==4.4.1
 Django==1.11.2
 django-elasticsearch-dsl==0.1.0
 django-filter==1.0.4
-djangorestframework==3.6.3
+djangorestframework==3.11.2
 elasticsearch==5.4.0
 elasticsearch-dsl==5.3.0
 graphene==1.4
